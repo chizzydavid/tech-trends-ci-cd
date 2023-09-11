@@ -1,0 +1,36 @@
+namespace:
+  name: staging
+
+replicaCount: 3
+
+image:
+  repository: chizzydavid/techtrends
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 5111
+  targetPort: 3111
+  protocol: TCP
+
+resources: 
+  limits:
+    memory: 128Mi
+    cpu: 500m
+  requests:
+    memory: 90Mi
+    cpu: 300m
+
+
+containerPort: 3111
+
+livenessProbe:
+  path: /healthz
+  port: 3111
+
+readinessProbe:
+  path: /healthz
+  port: 3111
+
+
